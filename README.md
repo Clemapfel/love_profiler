@@ -56,32 +56,46 @@ Here, the "draw" zone is opened and closed during each frame, so the profiler on
 Let the game run for about 30 seconds; the longer it runs, the more accurate the results. Press space to get the report printed to the console:
 
 ```
-| Zone `draw` (1754 samples | 466 samples/s) | Ran for 3.764198s on `Fri Oct 4 00:10:11 2024` | GC : 0 % (0) | JIT : 0.17 % (3) |
-| Percentage (%) | # Samples | Name |
-|----------------|-----------|-----------------------------------------------------------|
-| 76.96 | 1350 | xpcall @ [builtin#21] |
-| 38.48 | 675 | [love "boot.lua"]:423 @ [love "boot.lua"]:456 |
-| 38.48 | 675 | draw @ main.lua:86 |
-| 38.48 | 675 | _run @ common/game_state.lua:305 |
-| 38.48 | 675 | main.lua:96 @ main.lua:97 |
-| 38.48 | 675 | [love "boot.lua"]:434 @ [love "boot.lua"]:447 |
-| 37.91 | 665 | _draw @ common/game_state.lua:465 |
-| 14.08 | 247 | draw @ menu/inventory_scene.lua:380 |
-| 12.48 | 219 | draw @ menu/tab_bar.lua:190 |
-| 12.08 | 212 | draw @ common/shape_rectangle.lua:29 |
-| 9.97 | 175 | draw @ menu/inventory_scene.lua:382 |
-| 8.43 | 148 | draw @ common/label.lua:64 |
-| 7.69 | 135 | draw @ common/glyph.lua:272 |
-| 7.69 | 135 | _draw_glyph @ common/glyph.lua:237 |
-| 6.72 | 118 | draw @ common/vertex_shape.lua:199 |
-| 6.49 | 114 | draw @ common/sprite.lua:65 |
-| 4.9 | 86 | draw @ menu/inventory_scene.lua:368 |
-| 4.61 | 81 | _bind_stencil @ common/frame.lua:65 |
-| 4.5 | 79 | draw @ common/frame.lua:83 |
-(...)
-| 0.11 | 2 | draw @ common/control_indicator.lua:200 |
-| 0.11 | 2 | draw @ common/sprite.lua:67 |
-| < 0.1 | 16 | ... |
+ | Zone `draw` (1752 samples | 466 samples/s)
+ | Ran for 3.759228s on `Fri Oct  4 02:10:11 2024`
+ | GC  : 0 % (0)
+ | JIT : 0.17 % (3)
+ |
+ | Percentage (%) | # Samples | Name                                                      |
+ |----------------|-----------|-----------------------------------------------------------|
+ | 77.05          | 1350      | xpcall @ [builtin#21]                                     |
+ | 38.52          | 675       | [love "boot.lua"]:423 @ [love "boot.lua"]:456             |
+ | 38.52          | 675       | draw @ main.lua:86                                        |
+ | 38.52          | 675       | _run @ common/game_state.lua:305                          |
+ | 38.52          | 675       | main.lua:96 @ main.lua:97                                 |
+ | 38.52          | 675       | [love "boot.lua"]:434 @ [love "boot.lua"]:447             |
+ | 37.95          | 665       | _draw @ common/game_state.lua:465                         |
+ | 14.09          | 247       | draw @ menu/inventory_scene.lua:380                       |
+ | 12.5           | 219       | draw @ menu/tab_bar.lua:190                               |
+ | 12.1           | 212       | draw @ common/shape_rectangle.lua:29                      |
+ | 9.98           | 175       | draw @ menu/inventory_scene.lua:382                       |
+ | 8.44           | 148       | draw @ common/label.lua:64                                |
+ | 7.7            | 135       | draw @ common/glyph.lua:272                               |
+ | 7.7            | 135       | _draw_glyph @ common/glyph.lua:237                        |
+ | 6.73           | 118       | draw @ common/vertex_shape.lua:199                        |
+ | 6.5            | 114       | draw @ common/sprite.lua:65                               |
+ | 4.9            | 86        | draw @ menu/inventory_scene.lua:368                       |
+ | 4.62           | 81        | _bind_stencil @ common/frame.lua:65                       |
+ (...)
+ | 0.22           | 4         | draw @ common/spacer.lua:29                               |
+ | 0.22           | 4         | draw @ menu/tab_bar.lua:194                               |
+ | 0.22           | 4         | draw @ common/frame.lua:85                                |
+ | 0.17           | 3         | draw @ common/scrollbar.lua:79                            |
+ | 0.17           | 3         | draw @ menu/inventory_scene.lua:379                       |
+ | 0.11           | 2         | draw @ common/shape_rectangle.lua:16                      |
+ | 0.11           | 2         | bind @ common/shader.lua:31                               |
+ | 0.11           | 2         | draw @ common/glyph.lua:268                               |
+ | 0.11           | 2         | draw @ common/frame.lua:77                                |
+ | 0.11           | 2         | stencil @ common/graphics.lua:181                         |
+ | 0.11           | 2         | send @ common/shader.lua:20                               |
+ | 0.11           | 2         | draw @ common/control_indicator.lua:200                   |
+ | 0.11           | 2         | draw @ common/sprite.lua:67                               |
+ | < 0.1          | 16        | ...    
 ```
 
 The (...) indicates omitted rows for brevity in this `README` only. The actual output may be longer.
@@ -102,38 +116,41 @@ We are in zone draw, and over the approximately 30 seconds our game ran, 3.76 se
 Next, examine the list of function names. The first column shows the percentage of samples collected, the second column is the absolute number of samples, and the last column is the function name, formatted as `<function_name> @ <file_name>:<line_number>`.
 
 ```
-| Percentage (%) | # Samples | Name |
-|----------------|-----------|-----------------------------------------------------------|
-| 76.96 | 1350 | xpcall @ [builtin#21] |
-| 38.48 | 675 | [love "boot.lua"]:423 @ [love "boot.lua"]:456 |
-| 38.48 | 675 | draw @ main.lua:86 |
-| 38.48 | 675 | main.lua:96 @ main.lua:97 |
-| 38.48 | 675 | [love "boot.lua"]:434 @ [love "boot.lua"]:447 |
-| 37.91 | 665 | _draw @ common/game_state.lua:465 |
-| 14.08 | 247 | draw @ menu/inventory_scene.lua:380 |
-| 12.48 | 219 | draw @ menu/tab_bar.lua:190 |
-| 12.08 | 212 | draw @ common/shape_rectangle.lua:29 |
+ | Percentage (%) | # Samples | Name                                                      |
+ |----------------|-----------|-----------------------------------------------------------|
+ | 77.05          | 1350      | xpcall @ [builtin#21]                                     |
+ | 38.52          | 675       | [love "boot.lua"]:423 @ [love "boot.lua"]:456             |
+ | 38.52          | 675       | draw @ main.lua:86                                        |
+ | 38.52          | 675       | _run @ common/game_state.lua:305                          |
+ | 38.52          | 675       | main.lua:96 @ main.lua:97                                 |
+ | 38.52          | 675       | [love "boot.lua"]:434 @ [love "boot.lua"]:447             |
+ | 37.95          | 665       | _draw @ common/game_state.lua:465                         |
+ | 14.09          | 247       | draw @ menu/inventory_scene.lua:380                       |
+ | 12.5           | 219       | draw @ menu/tab_bar.lua:190                               |
+ | 12.1           | 212       | draw @ common/shape_rectangle.lua:29                      |
+ | 9.98           | 175       | draw @ menu/inventory_scene.lua:382                       |
+ | 8.44           | 148       | draw @ common/label.lua:64                                |
 ```
 
 Most of the time was spent in `xpcall`, love's `boot.lua`, and `love.draw`. These results are expected, as our zone was inside those functions. In general, the first few lines often don't provide any useful information, as they usually not our functions and we have no control over them. The first interesting lines are:
 
 ```
-| 37.91 | 665 | _draw @ common/game_state.lua:465 |
-| 14.08 | 247 | draw @ menu/inventory_scene.lua:380 |
-| 12.48 | 219 | draw @ menu/tab_bar.lua:190 |
-| 12.08 | 212 | draw @ common/shape_rectangle.lua:29 |
+ | 37.95          | 665       | _draw @ common/game_state.lua:465                         |
+ | 14.09          | 247       | draw @ menu/inventory_scene.lua:380                       |
+ | 12.5           | 219       | draw @ menu/tab_bar.lua:190                               |
+ | 12.1           | 212       | draw @ common/shape_rectangle.lua:29                      |
 ```
 
 Here, 40% of the draw time was spent in the `_draw` function of our game state. Within those 40%, the `draw` methods of various objects are included. For example, 12% of the overall time was spent on drawing `tab_bar`, which could indicate a performance issue or that `tab_bar` is a particularly common or complex object. These results can guide performance optimization, or you may want to examine less common functions further down the list.
 
-Note that these results do not indicate that `tab_bar:draw` was called 219 times. Instead, during the statistical process of periodically checking which function we are currently in, 219 times, we happened to be in `tab_bar:draw`. This allows us to deduce with reasonable accuracy that about 219 / 1754 = 12.48% of runtime was spent in that function. The more total samples collected, the higher the likelihood of accurate results.
+Note that these results do not indicate that `tab_bar:draw` was called 219 times. Instead, during the statistical process of periodically checking which function we are currently in, 219 times, we happened to be in `tab_bar:draw`. This allows us to deduce with reasonable accuracy that about 219 / 1754 = 12.5% of runtime was spent in that function. The more total samples collected, the higher the likelihood of accurate results.
 
 At the bottom of the table, we have:
 
 ```
-| 0.11 | 2 | draw @ common/control_indicator.lua:200 |
-| 0.11 | 2 | draw @ common/sprite.lua:67 |
-| < 0.1 | 16 | ... |
+| 0.11           | 2         | draw @ common/control_indicator.lua:200                   |
+| 0.11           | 2         | draw @ common/sprite.lua:67                               |
+| < 0.1          | 16        | ...    
 ```
 
 Any function taking less than 0.1% of collected samples is abbreviated, and the total sum of samples of these functions is printed in the last column. We see that 16 samples were taken up by these negligible functions.

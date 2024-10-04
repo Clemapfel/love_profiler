@@ -26,7 +26,7 @@ profiler = require "love_profiler.profiler"
 
 # Usage
 
-A statistical profiler samples the program at regular intervals rather than noting every function call. These intervals are frequent enough that it's statistically unlikely to miss anything significant, but it's not impossible. To improve accuracy, the profiler should run for at least a few seconds; 5 seconds or more is recommended. If profiling a short piece of code, loop through it long enough to spend 5 seconds executing it.
+A statistical profiler samples the program at regular intervals rather than noting every function call. These intervals are frequent enough that it's statistically unlikely to miss anything significant, but it's not impossible. To improve accuracy, the profiler should run for at least a few seconds; 5 seconds or more is recommended. If profiling a short piece of code, loop through it often enough to spend at least 5 seconds executing it.
 
 The profiler uses a "zone stack" to track active zones. Use `profiler.push("zone_name")` to add a zone to the stack and `profiler.pop()` to remove the last pushed zone. After sufficient time has passed, use `print(profiler.report())` to get a nicely formatted report.
 
@@ -131,7 +131,7 @@ At the bottom of the table, we have:
 
 Any function taking less than 0.1% of collected samples is abbreviated, and the total sum of samples of these functions is printed in the last column. We see that 16 samples were taken up by these negligible functions.
 
-Lastly, eagle-eyed readers may notice that the total sample count and percentage do not add up to 1754, or 100%, respectively. This is because function calls are nested. For example, if function `A` calls function `B`, which calls function `C`, like this:
+Lastly, eagle-eyed readers may notice that the total sample count and percentage of all the rows do not add up to 1754, or 100%, respectively. This is because function calls are **nested**. For example, if function `A` calls function `B`, which calls function `C`, like this:
 
 ```lua
 function C()

@@ -65,37 +65,32 @@ do
                 table.insert(zones, profiler._current_zone_stack[i])
             end
 
-            local data = {}
-            for _ = 1, n_samples do
-                data.callstack = profiler._jit.dumpstack(thread, _format, _infinity)
-                data.zones = zones
-                data.vmstate = vmstate
-            end
+            local callstack = profiler._jit.dumpstack(thread, _format, _infinity)
 
             local splits = {}
-            if data.vmstate == "N" or data.vmstate == "J" or data.vmstate == "C" then
+            if vmstate == "N" or vmstate == "J" or vmstate == "C" then
                 -- split into individual function names
-                for split in string.gmatch(data.callstack, "([^;]+)") do
+                for split in string.gmatch(callstack, "([^;]+)") do
                     table.insert(splits, split)
                 end
             end
 
-            for _, zone_i in pairs(data.zones) do
+            for _, zone_i in pairs(zones) do
                 local zone_name = profiler._zone_index_to_name[zone_i]
                 local zone = profiler._data[zone_name]
 
-                if data.vmstate == "N" then
+                if vmstate == "N" then
                     zone.n_compiled_samples = zone.n_compiled_samples + n_samples
-                elseif data.vmstate == "I" then
+                elseif vmstate == "I" then
                     zone.n_interpreted_samples = zone.n_interpreted_samples + n_samples
-                elseif data.vmstate == "C" then
+                elseif vmstate == "C" then
                     zone.n_c_code_samples = zone.n_c_code_samples + n_samples
-                elseif data.vmstate == "J" then
+                elseif vmstate == "J" then
                     zone.n_jit_samples = zone.n_jit_samples + n_samples
-                elseif data.vmstate == "G" then
+                elseif vmstate == "G" then
                     zone.n_gc_samples = zone.n_gc_samples + n_samples
                 else
-                    error("In profiler._callback: unhandled vmstate `" .. data.vmstate .. "`")
+                    error("In profiler._callback: unhandled vmstate `" .. vmstate .. "`")
                 end
 
                 for _, split in pairs(splits) do

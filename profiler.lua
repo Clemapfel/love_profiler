@@ -40,7 +40,6 @@ profiler.report()
 local profiler = {}
 
 profiler._jit = require("jit.profile")
-profiler._socket = require("socket")
 profiler._run_i = 1
 profiler._is_running = false
 
@@ -151,7 +150,7 @@ function profiler.push(name)
     end
 
     if profiler._zone_to_start_time[name] == nil then
-        profiler._zone_to_start_time[name] = profiler._socket.gettime()
+        profiler._zone_to_start_time[name] = os.time()
     end
 
     if profiler._zone_to_duration[name] == nil then
@@ -179,7 +178,7 @@ function profiler.pop()
         table.remove(profiler._current_zone_stack, profiler._n_zones)
         profiler._n_zones = profiler._n_zones - 1
 
-        local now = profiler._socket.gettime()
+        local now = os.time()
         profiler._zone_to_duration[last_zone] = profiler._zone_to_duration[last_zone] + (now - profiler._zone_to_start_time[last_zone])
         profiler._zone_to_start_time[last_zone] = nil
     else
@@ -269,8 +268,8 @@ do
             local c_percentage = _format_percentage(entry.n_c_code_samples / (entry.n_interpreted_samples + entry.n_compiled_samples + entry.n_c_code_samples))
             local interpreted_percentage = _format_percentage(entry.n_interpreted_samples / (entry.n_interpreted_samples + entry.n_compiled_samples))
 
-            local duration = math.round(profiler._zone_to_duration[zone_name] * 10e5) / 10e5
-            local samples_per_second = math.round(entry.n_samples / duration)
+            local duration = math.floor(profiler._zone_to_duration[zone_name] * 10e5) / 10e5
+            local samples_per_second = math.floor(entry.n_samples / duration)
 
             local str = {
                 " | Zone `" .. zone_name .. "` (" .. entry.n_samples .. " samples | " .. samples_per_second .. " samples/s)\n",

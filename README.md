@@ -14,7 +14,7 @@ In a git-managed project, run:
 git clone https://github.com/clemapfel/love_profiler
 ```
 
-Alternatively, download the file manually from this link, and add it to your project using your operating system's file explorer. Using git is the recommended method to install this library. Ensure the love_profiler folder is in the root of your game directory. Then, in Lua, add:
+Alternatively, download the file manually from [this link](https://github.com/Clemapfel/love_profiler/blob/main/profiler.lua), and add it to your project using your operating system's file explorer. Using git is the recommended method to install this library. Ensure the love_profiler folder is in the root of your game directory. Then, in Lua, add:
 
 ```lua
 profiler = require "love_profiler.profiler"

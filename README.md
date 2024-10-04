@@ -2,9 +2,11 @@
 
 A profiler is a program that runs in the background of your project, tracking performance data for optimization purposes. Traditional Lua profilers using debug.sethook do not work with Löve because it uses LuaJIT, which typically does not invoke these hooks. Additionally, the LuaJIT-provided profiler is incompatible with Löve, as it requires running the profiler executable on a Lua script, whereas Löve projects use their own executable. Clem's Löve Profiler offers the following advantages:
 
-+ Requires only one line to install and three lines to include and use in your project.
-+ Has no performance overhead, ensuring your program runs at its usual speed without skewing data.
-+ Presents data in a well-formatted manner.
++ Requires only one line to install and three lines to include and use in your project
++ Has no performance overhead, ensuring your program runs at its usual speed without skewing data
++ Presents the data in a well-formatted manner
+
+> **NOTE:** This project requires LuaJIT and will not work with regular Lua. 
 
 # Installation
 
@@ -14,19 +16,13 @@ In a git-managed project, run:
 git clone https://github.com/clemapfel/love_profiler
 ```
 
-Alternatively, download the file manually from [this link](https://github.com/Clemapfel/love_profiler/blob/main/profiler.lua), and add it to your project using your operating system's file explorer. Using git is the recommended method to install this library. Ensure the love_profiler folder is in the root of your game directory. Then, in Lua, add:
+Alternatively, download the project manually from [this link](https://github.com/Clemapfel/love_profiler/archive/refs/heads/main.zip), and add it to your project using your operating system's file explorer. Using git is the recommended method to install this library. 
+
+Ensure the `love_profiler` folder is in the root of your game directory. Then, in Lua, add:
 
 ```lua
 profiler = require "love_profiler.profiler"
 ```
-
-Or, if the file was downloaded directly:
-
-```lua
-profiler = require "profiler"
-```
-
-Note that this project requires LuaJIT and will not work with regular Lua.
 
 # Usage
 

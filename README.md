@@ -1,6 +1,6 @@
 # Clem's Löve Profiler
 
-A profiler is a program that runs in the background of your project, tracking performance data for optimization purposes. Traditional Lua profilers using `debug.sethook` do not work with Löve because it uses LuaJIT, which is not guaranteed to invoke these hooks, and profiler using this method comes with great performance overhead. Additionally, the [LuaJIT-provided profiler](https://luajit.org/ext_profiler.html) is incompatible with Löve, as it requires running the profiler executable directly on a lua script, whereas Löve projects use their own executable. 
+A profiler is a program that runs in the background of your project, tracking performance data for optimization purposes. Traditional Lua profilers using `debug.sethook` do not work with Löve because it uses LuaJIT, which is not guaranteed to invoke these hooks, and profiler using this method come with great performance overhead. Additionally, the [LuaJIT-provided profiler](https://luajit.org/ext_profiler.html) is incompatible with Löve, as it requires running the profiler executable directly on a lua script, whereas Löve projects use their own executable. 
 
 Clem's Löve Profiler offers the following advantages over other profilers:
 

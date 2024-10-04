@@ -141,9 +141,9 @@ Most of the time was spent in `xpcall`, love's `boot.lua`, and `love.draw`. Thes
  | 12.1           | 212       | draw @ common/shape_rectangle.lua:29                      |
 ```
 
-Here, 40% of the draw time was spent in the `_draw` function of our game state. Within those 40%, the `draw` methods of various objects are included. For example, 12% of the overall time was spent on drawing `tab_bar`, which could indicate a performance issue or that `tab_bar` is a particularly common or complex object. These results can guide performance optimization, or you may want to examine less common functions further down the list.
+Here, 38% of the draw time was spent in the `_draw` function of our game state. Within those 38%, the `draw` methods of various objects are included. For example, 12% of the overall time was spent on drawing `tab_bar`, which could indicate a performance issue or that `tab_bar` is a particularly common or complex object. These results can guide performance optimization, or you may want to examine less common functions further down the list.
 
-Note that these results do not indicate that `tab_bar:draw` was called 219 times. Instead, during the statistical process of periodically checking which function we are currently in, 219 times, we happened to be in `tab_bar:draw`. This allows us to deduce with reasonable accuracy that about 219 / 1754 = 12.5% of runtime was spent in that function. The more total samples collected, the higher the likelihood of accurate results.
+Note that these results do not indicate that `tab_bar:draw` was called 219 times. Instead, during the statistical process of periodically checking which function we are currently in, 219 times, we happened to be in `tab_bar:draw`. This allows us to deduce with reasonable accuracy that about `219 / 1754 = 12.5%` of runtime was spent in that function. The more total samples collected, the higher the likelihood of accurate results.
 
 At the bottom of the table, we have:
 

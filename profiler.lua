@@ -204,6 +204,8 @@ do
             for name, count in pairs(entry.function_to_count) do
                 entry.function_to_percentage[name] = _format_percentage(count / entry.n_samples)
                 local function_count = entry.function_to_count[name]
+
+                -- percentage may be > if function name occurs twice in same callstack
                 if function_count < 0 then
                     function_count = 0
                 elseif function_count > entry.n_samples then
@@ -212,7 +214,6 @@ do
 
                 entry.function_to_count[name] = function_count
 
-                -- percentage may be > if function name occurs twice in same callstack
                 table.insert(names_in_order, name)
             end
 

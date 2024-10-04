@@ -89,7 +89,12 @@ The (...) indicates omitted rows for brevity in this `README` only. The actual o
 Interpreting these results, first look at the header:
 
 ```
-| Zone `draw` (1754 samples | 466 samples/s) | Ran for 3.764198s on `Fri Oct 4 00:10:11 2024` | GC : 0 % (0) | JIT : 0.17 % (3) |
+| Zone `draw` (1754 samples 
+| 466 samples/s) 
+| Ran for 3.764198s on `Fri Oct 4 00:10:11 2024` 
+| GC : 0 % (0) 
+| JIT : 0.17 % (3) 
+|
 ```
 
 We are in zone draw, and over the approximately 30 seconds our game ran, 3.76 seconds were spent in this zone. We collected 1754 samples, indicating how many times the profiler collected data. `GC` shows the percentage of samples spent on garbage collection; since we are in draw, a `GC` of 0% is expected. `JIT` shows the time spent on JIT (just-in-time) compilation, which is 0.17%, or 3 out of 1754 samples.

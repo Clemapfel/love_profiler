@@ -28,11 +28,11 @@ GitHub: https://github.com/clemapfel/love_profiler
 --[[
 -- ### USAGE
 
-profiler = require "love_profiler.profiler
+profiler = require "love_profiler.profiler"
 profiler.push("zone_name")
 -- profiled code here
 profiler.pop()
-profiler.report()
+print(profiler.report())
 
 -- note that the profiler needs to run for a few seconds in order to get accurate results
 ]]--

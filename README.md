@@ -132,7 +132,7 @@ Next, examine the list of function names. The first column shows the percentage 
  | 8.44           | 148       | draw @ common/label.lua:64                                |
 ```
 
-Most of the time was spent in `xpcall`, love's `boot.lua`, and `love.draw`. These results are expected, as our zone was inside those functions. In general, the first few lines often don't provide any useful information, as they usually not our functions and we have no control over them. The first interesting lines are:
+Most of the time was spent in `xpcall`, love's `boot.lua`, and `love.draw`. These results are expected, as our zone was inside those functions. In general, the first few lines often don't provide any useful information, as they're usually not our functions and we have no control over them. The first interesting lines are:
 
 ```
  | 37.95          | 665       | _draw @ common/game_state.lua:465                         |

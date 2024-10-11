@@ -194,6 +194,7 @@ do
 
     --- @brief get state of the profiling data pretty-printed
     function profiler.report()
+        local out = {}
         for zone_name, entry in pairs(profiler._data) do
             local names_in_order = {}
             for name, count in pairs(entry.function_to_count) do
@@ -305,9 +306,9 @@ do
                 rows_printed = rows_printed + 1
             end
 
-            return table.concat(str, "") .. "\n"
+            table.insert(out, table.concat(str, "") .. "\n")
         end
-        return ""
+        return table.concat(out, "\n")
     end
 end -- do-end
 

@@ -179,7 +179,7 @@ Then if the profiler indicates the current sample is in `C`, we know that the sa
 
 # Credits
 
-This library was written and designed by [Clem Cords](clemens-cords.com). Consider donating via GitHub Sponsor to reward past work and help with the continued development of this and other Löve-related projects. If you need assistance or want to hire me for freelance work (on your game or other projects), feel free to reach out via email or Discord, username `clemapfel`. Thank you for your consideration.
+This library was written and designed by [Clem Cords](https://clemens-cords.com). Consider donating via GitHub Sponsor to reward past work and help with the continued development of this and other Löve-related projects. If you need assistance or want to hire me for freelance work (on your game or other projects), feel free to reach out via email or Discord, username `clemapfel`. Thank you for your consideration.
 
 # License
 
